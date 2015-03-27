@@ -50,7 +50,13 @@ To serialize java objects:
   	
   	// serialize user object.
   	byte[] userBytes = kryoContext.serialze(user);
-
+  
+  	
+Default Buffer size is 100KB, buffer size can be changed while serializing:
+    
+    int moreBuffer = 200 * 1024;
+    byte[] listBytes = kryoContext.serialze(list, moreBuffer);
+    
 
 
 To deserialize:
