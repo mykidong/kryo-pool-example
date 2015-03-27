@@ -60,15 +60,29 @@ public class KryoPoolingTest {
 				for(int k = 0; k < 3; k++)
 				{
 					Map<String, Object> map = new HashMap<>();					
-					map.put("any-prop1", "any-value1");
-					map.put("any-prop2", "any-value2");
-					map.put("any-prop3", "any-value3");
+					map.put("any-prop1", "any-value1-" + k);
+					map.put("any-prop2", "any-value2-" + k);
+					map.put("any-prop3", "any-value3-" + k);
 					
 					list.add(map);
 				}
 				
 				// serialize list.
 				byte[] listBytes = kryoContext.serialze(list);
+				
+				List<User> userList = new ArrayList<>();
+				for(int k = 0; k < 3; k++)
+				{
+					User user = new User();
+					user.setName("any-name" + k);
+					user.setAge(50 + k);
+					user.setAddress("any-address..." + k);
+					
+					userList.add(user);
+				}
+				
+				// serialize user list.
+				byte[] userListBytes = kryoContext.serialze(userList);
 				
 				
 				Map<String, Object> map = new HashMap<>();				
@@ -92,6 +106,9 @@ public class KryoPoolingTest {
 				// deserialize list.
 				List<Map<String, Object>> retList = (List<Map<String, Object>>)kryoContext.deserialze(ArrayList.class, listBytes);
 				
+				// deserialize user list.
+				List<User> retUserList = (List<User>)kryoContext.deserialze(ArrayList.class, userListBytes);
+				
 				// deserialize map.
 				Map<String, Object> retMap = (Map<String, Object>)kryoContext.deserialze(HashMap.class, mapBytes);
 				
@@ -101,6 +118,8 @@ public class KryoPoolingTest {
 				
 				try {				
 					System.out.println("retList: [" + new ObjectMapper().writeValueAsString(retList) + "]");
+					
+					System.out.println("retUserList: [" + new ObjectMapper().writeValueAsString(retUserList) + "]");
 					
 					System.out.println("retMap: [" + new ObjectMapper().writeValueAsString(retMap) + "]");
 					
