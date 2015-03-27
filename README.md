@@ -22,34 +22,49 @@ To get kryo pool with class registration:
 To serialize java objects:
 
     List<Map<String, Object>> list = new ArrayList<>();
-  	for(int k = 0; k < 3; k++)
-  	{
-  		Map<String, Object> map = new HashMap<>();					
-  		map.put("any-prop1", "any-value1");
-  		map.put("any-prop2", "any-value2");
-  		map.put("any-prop3", "any-value3");
-  		
-  		list.add(map);
-  	}
-  	
-  	// serialize list.
-  	byte[] listBytes = kryoContext.serialze(list);
-  	
-  	Map<String, Object> map = new HashMap<>();				
-  	map.put("any-prop1", "any-value1");
-  	map.put("any-prop2", "any-value2");
-  	map.put("any-prop3", "any-value3");
-  	
-  	// serialize map.
-  	byte[] mapBytes = kryoContext.serialze(map);
-  
-  	User user = new User();
-  	user.setName("any-name");
-  	user.setAge(50);
-  	user.setAddress("any-address...");
-  	
-  	// serialize user object.
-  	byte[] userBytes = kryoContext.serialze(user);
+	for(int k = 0; k < 3; k++)
+	{
+		Map<String, Object> map = new HashMap<>();					
+		map.put("any-prop1", "any-value1-" + k);
+		map.put("any-prop2", "any-value2-" + k);
+		map.put("any-prop3", "any-value3-" + k);
+		
+		list.add(map);
+	}
+	
+	// serialize list.
+	byte[] listBytes = kryoContext.serialze(list);
+	
+	List<User> userList = new ArrayList<>();
+	for(int k = 0; k < 3; k++)
+	{
+		User user = new User();
+		user.setName("any-name" + k);
+		user.setAge(50 + k);
+		user.setAddress("any-address..." + k);
+		
+		userList.add(user);
+	}
+	
+	// serialize user list.
+	byte[] userListBytes = kryoContext.serialze(userList);
+	
+	
+	Map<String, Object> map = new HashMap<>();				
+	map.put("any-prop1", "any-value1");
+	map.put("any-prop2", "any-value2");
+	map.put("any-prop3", "any-value3");
+	
+	// serialize map.
+	byte[] mapBytes = kryoContext.serialze(map);
+
+	User user = new User();
+	user.setName("any-name");
+	user.setAge(50);
+	user.setAddress("any-address...");
+	
+	// serialize user object.
+	byte[] userBytes = kryoContext.serialze(user);
   
   	
 Default Buffer size is 100KB, buffer size can be changed while serializing:
@@ -64,6 +79,9 @@ To deserialize:
     // deserialize list.
   	List<Map<String, Object>> retList = 
   	      (List<Map<String, Object>>)kryoContext.deserialze(ArrayList.class, listBytes);
+  	      
+  	// deserialize user list.
+	List<User> retUserList = (List<User>)kryoContext.deserialze(ArrayList.class, userListBytes);
   	
   	// deserialize map.
   	Map<String, Object> retMap = 
