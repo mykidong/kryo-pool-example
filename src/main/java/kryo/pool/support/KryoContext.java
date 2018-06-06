@@ -8,7 +8,7 @@ import com.esotericsoftware.kryo.io.Output;
 import com.esotericsoftware.kryo.pool.KryoFactory;
 import com.esotericsoftware.kryo.pool.KryoPool;
 
-public class KryoContext {	
+public class KryoContext {
 
 	private static final int DEFAULT_BUFFER = 1024 * 100;
 	
@@ -66,7 +66,7 @@ public class KryoContext {
 	
 	public Object deserialze(Class clazz, byte[] serialized)
 	{
-		Object obj;			
+		Object obj;
 	
 		Kryo kryo = pool.borrow();
 		
