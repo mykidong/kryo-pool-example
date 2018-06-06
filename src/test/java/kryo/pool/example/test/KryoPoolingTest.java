@@ -42,6 +42,8 @@ public class KryoPoolingTest {
 	private static class KryoWorkerThread implements Runnable
 	{
 		private int MAX = 1000;
+
+		private ObjectMapper mapper = new ObjectMapper();
 		
 		private KryoContext kryoContext;
 		
@@ -117,13 +119,13 @@ public class KryoPoolingTest {
 				
 				
 				try {				
-					System.out.println("retList: [" + new ObjectMapper().writeValueAsString(retList) + "]");
+					System.out.println("retList: [" + mapper.writeValueAsString(retList) + "]");
 					
-					System.out.println("retUserList: [" + new ObjectMapper().writeValueAsString(retUserList) + "]");
+					System.out.println("retUserList: [" + mapper.writeValueAsString(retUserList) + "]");
 					
-					System.out.println("retMap: [" + new ObjectMapper().writeValueAsString(retMap) + "]");
+					System.out.println("retMap: [" + mapper.writeValueAsString(retMap) + "]");
 					
-					System.out.println("retUser: [" + new ObjectMapper().writeValueAsString(retUser) + "]");
+					System.out.println("retUser: [" + mapper.writeValueAsString(retUser) + "]");
 				} catch (Exception e) {					
 					e.printStackTrace();
 				} 		
