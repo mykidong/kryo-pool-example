@@ -7,7 +7,7 @@ This example shows the usage of kryo pooling and how to serialize/deserialize ja
 To get kryo pool with class registration:
 
     import kryo.pool.support.KryoClassRegistrator;
-    import kryo.pool.support.KryoContext;
+    import kryo.pool.support.DefaultKryoContext;
 
     // kryo pool context.
     KryoContext kryoContext = KryoContext.newKryoContextFactory(new KryoClassRegistrator(){

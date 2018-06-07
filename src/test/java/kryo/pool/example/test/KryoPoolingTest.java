@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 import kryo.pool.example.api.dao.ItemDao;
 import kryo.pool.support.KryoClassRegistrator;
 import kryo.pool.support.KryoContext;
+import kryo.pool.support.DefaultKryoContext;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
@@ -26,7 +27,7 @@ public class KryoPoolingTest {
 	public void checkKryoThreadSafetyWithKryoPool()
 	{		
 		// kryo pool factory context.
-		KryoContext kryoContext = KryoContext.newKryoContextFactory(new KryoClassRegistrator(){
+		KryoContext kryoContext = DefaultKryoContext.newKryoContextFactory(new KryoClassRegistrator(){
 			@Override
 			public void register(Kryo kryo) {
 				kryo.register(ArrayList.class);	
