@@ -11,12 +11,9 @@ To get kryo pool with class registration:
     import kryo.pool.support.DefaultKryoContext;
 
     // kryo pool context.
-    KryoContext kryoContext = DefaultKryoContext.newKryoContextFactory(new KryoClassRegistrator(){
-    	@Override
-    	public void register(Kryo kryo) {
-    		kryo.register(ArrayList.class);	
-    		kryo.register(HashMap.class);	
-    	}		
+    KryoContext kryoContext = DefaultKryoContext.newKryoContextFactory(kryo -> {
+            kryo.register(ArrayList.class);
+            kryo.register(HashMap.class);
     });
   
 
